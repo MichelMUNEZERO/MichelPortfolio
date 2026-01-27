@@ -110,7 +110,12 @@ function Footer() {
             >
               <FaTwitter />
             </a>
-            <a href="#" aria-label="Instagram">
+            <a
+              href="https://instagram.com/lechimunnaa"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
               <FaInstagram />
             </a>
           </div>
