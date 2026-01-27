@@ -56,16 +56,19 @@
 .info-item {
   display: flex;
   gap: 10px;
+  align-items: flex-start;
 }
 
 .info-label {
   font-weight: 600;
   color: var(--text-dark);
-  min-width: 80px;
+  min-width: 130px;
+  flex-shrink: 0;
 }
 
 .info-value {
   color: var(--text-light);
+  word-break: break-word;
 }
 
 .cv-buttons {
