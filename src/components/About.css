@@ -68,7 +68,9 @@
 
 .info-value {
   color: var(--text-light);
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cv-buttons {
