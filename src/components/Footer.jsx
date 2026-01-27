@@ -7,6 +7,7 @@ import {
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
+  FaGithub,
 } from "react-icons/fa";
 import { TbHexagon } from "react-icons/tb";
 import "./Footer.css";
@@ -93,10 +94,20 @@ function Footer() {
             >
               <FaLinkedinIn />
             </a>
-            <a href="#" aria-label="Facebook">
-              <FaFacebookF />
+            <a
+              href="https://github.com/MichelMUNEZERO"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <FaGithub />
             </a>
-            <a href="#" aria-label="Twitter">
+            <a
+              href="https://x.com/lehcimunna"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+            >
               <FaTwitter />
             </a>
             <a href="#" aria-label="Instagram">
