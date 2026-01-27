@@ -37,12 +37,6 @@ function Header() {
               <a href="#portfolio">Portfolio</a>
             </li>
             <li>
-              <a href="#pages">Pages</a>
-            </li>
-            <li>
-              <a href="#blog">Blog</a>
-            </li>
-            <li>
               <a href="#contact" className="btn-contact">
                 Contact
               </a>
