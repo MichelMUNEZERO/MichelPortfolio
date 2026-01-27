@@ -68,6 +68,16 @@
   color: var(--text-light);
 }
 
+.cv-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cv-buttons a {
+  text-decoration: none;
+}
+
 @media (max-width: 968px) {
   .about-content {
     grid-template-columns: 1fr;
@@ -84,5 +94,9 @@
 
   .about-info {
     grid-template-columns: 1fr;
+  }
+
+  .cv-buttons {
+    justify-content: center;
   }
 }

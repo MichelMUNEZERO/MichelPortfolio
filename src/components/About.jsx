@@ -67,7 +67,23 @@ function About() {
               </div>
             </div>
 
-            <button className="btn-primary">Download CV</button>
+            <div className="cv-buttons">
+              <a
+                href="https://drive.google.com/file/d/1GNkQ-WEvBUnnCnyyGIPmHa80tria_TO-/view"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="btn-primary">View CV</button>
+              </a>
+              <a
+                href="https://drive.usercontent.google.com/u/0/uc?id=1GNkQ-WEvBUnnCnyyGIPmHa80tria_TO-&export=download"
+                download="Michel_MUNEZERO_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="btn-primary">Download CV</button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
