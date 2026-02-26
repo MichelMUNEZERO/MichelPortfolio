@@ -12,8 +12,8 @@ function ProjectIdea() {
             Let's discuss your project!
           </h2>
           <p>
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration.
+            I'm always excited to hear about new projects and ideas. Let's
+            collaborate to bring your vision to life with innovative solutions.
           </p>
           <button className="btn-primary">Let's work together</button>
         </div>

@@ -84,7 +84,7 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2026 Michel MUNEZERO. All rights reserved.</p>
+          <p>&copy; 2023 Michel MUNEZERO. All rights reserved.</p>
           <div className="social-links">
             <a
               href="http://linkedin.com/in/michelmunezero"

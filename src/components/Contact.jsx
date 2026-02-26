@@ -29,8 +29,8 @@ function Contact() {
         <div className="contact-header">
           <h2 className="section-title">Let's discuss your Project</h2>
           <p className="contact-subtitle">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration.
+            Ready to start your next project? Share your ideas and requirements,
+            and I'll get back to you as soon as possible.
           </p>
         </div>
 

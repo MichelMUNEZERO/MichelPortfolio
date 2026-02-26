@@ -8,19 +8,19 @@ function Services() {
       icon: <FaLaptopCode />,
       title: "User Experience (UX)",
       description:
-        "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Creating intuitive and engaging user experiences through research, wireframing, and usability testing to ensure your product delights users.",
     },
     {
       icon: <FaMobileAlt />,
       title: "User Interface (UI)",
       description:
-        "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Designing beautiful, responsive interfaces with attention to detail, color theory, and typography that bring your brand to life.",
     },
     {
       icon: <FaCode />,
       title: "Web Development",
       description:
-        "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Building fast, scalable, and secure web applications using modern technologies and best practices to turn your vision into reality.",
     },
   ];
 
