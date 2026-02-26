@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
 function Contact() {
@@ -10,6 +11,12 @@ function Contact() {
     message: "",
   });
 
+  const [status, setStatus] = useState({
+    loading: false,
+    message: "",
+    type: "", // 'success' or 'error'
+  });
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -17,10 +24,66 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission
+    setStatus({ loading: true, message: "", type: "" });
+
+    try {
+      // EmailJS configuration
+      const serviceId = "service_7krprop";
+      const templateId = "template_24vu669";
+      const publicKey = "4QcufM_4cy-ugl3yG";
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          budget: formData.budget,
+          message: formData.message,
+          to_email: "michelmunezero25@gmail.com", // Your email
+        },
+        publicKey,
+      );
+
+      console.log("Email sent successfully:", response);
+
+      setStatus({
+        loading: false,
+        message:
+          "Thank you! Your message has been sent successfully. I'll get back to you soon!",
+        type: "success",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        budget: "",
+        message: "",
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setStatus({ loading: false, message: "", type: "" });
+      }, 5000);
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setStatus({
+        loading: false,
+        message:
+          "Oops! Something went wrong. Please try again or contact me directly at michelmunezero25@gmail.com",
+        type: "error",
+      });
+
+      // Clear error message after 7 seconds
+      setTimeout(() => {
+        setStatus({ loading: false, message: "", type: "" });
+      }, 7000);
+    }
   };
 
   return (
@@ -35,6 +98,12 @@ function Contact() {
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>
+          {status.message && (
+            <div className={`status-message ${status.type}`}>
+              {status.message}
+            </div>
+          )}
+
           <div className="form-row">
             <div className="form-group">
               <input
@@ -96,8 +165,12 @@ function Contact() {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn-primary">
-            Submit
+          <button
+            type="submit"
+            className="btn-primary"
+            disabled={status.loading}
+          >
+            {status.loading ? "Sending..." : "Submit"}
           </button>
         </form>
       </div>
