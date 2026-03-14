@@ -34,7 +34,7 @@ function Hero() {
                 <p>Projects Completed</p>
               </div>
               <div className="stat-item">
-                <h3>1</h3>
+                <h3>2</h3>
                 <p>Certification</p>
               </div>
             </div>

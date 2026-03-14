@@ -15,7 +15,16 @@ function ProjectIdea() {
             I'm always excited to hear about new projects and ideas. Let's
             collaborate to bring your vision to life with innovative solutions.
           </p>
-          <button className="btn-primary">Let's work together</button>
+          <button
+            className="btn-primary"
+            onClick={() =>
+              document
+                .getElementById("contact")
+                .scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Let's work together
+          </button>
         </div>
       </div>
     </section>
