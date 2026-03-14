@@ -17,16 +17,15 @@ function Hero() {
               Technology - University of Rwanda with a passion for web design. I
               specialize in creating clean, modern, and responsive websites.
               Currently expanding my expertise into cybersecurity, having
-              completed a certification course at TechCrush. I'm dedicated to
-              delivering high-quality solutions that meet user needs.
+              completed a certification course at TechCrush and Forward Edge
+              Cybersecurity Bootcamp. I'm dedicated to delivering high quality
+              solutions that meet user needs.
             </p>
             <button className="btn-primary">Hire me</button>
 
             <div className="hero-stats">
               <div className="stat-item">
-                <h3>
-                  3 <span>+</span>
-                </h3>
+                <h3>3+</h3>
                 <p>Years Studying</p>
               </div>
               <div className="stat-item">
@@ -34,7 +33,7 @@ function Hero() {
                 <p>Projects Completed</p>
               </div>
               <div className="stat-item">
-                <h3>2</h3>
+                <h3>2+</h3>
                 <p>Certification</p>
               </div>
             </div>

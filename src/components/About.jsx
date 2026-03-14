@@ -27,8 +27,8 @@ function About() {
               Rwanda, specializing in web design and development. I create
               stylish, modern websites and digital experiences. Recently, I've
               begun exploring cybersecurity and completed a certification course
-              at TechCrush. I'm always eager to learn new technologies and take
-              on challenging projects.
+              at TechCrush and Forward Edge Cybersecurity Bootcamp. I'm always
+              eager to learn new technologies and take on challenging projects.
             </p>
 
             <div className="about-info">
@@ -50,7 +50,14 @@ function About() {
               </div>
               <div className="info-item">
                 <span className="info-label">Specialization:</span>
-                <span className="info-value">Web Design & Development</span>
+                <ul className="specialization-list">
+                  <li className="specialization-item">
+                    <span className="info-value">Web Design & Development</span>
+                  </li>
+                  <li className="specialization-item">
+                    <span className="info-value">Cybersecurity Enthusiast</span>
+                  </li>
+                </ul>
               </div>
               <div className="info-item">
                 <span className="info-label">Certification:</span>
