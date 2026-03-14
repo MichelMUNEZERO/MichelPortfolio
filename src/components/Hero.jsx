@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Hero.css";
+const roles = [
+  "Michel MUNEZERO",
+  "Frontend Developer",
+  "Cybersecurity Enthusiast",
+];
 
 function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timerId;
+
+    if (charIndex < currentRole.length) {
+      timerId = setTimeout(() => {
+        setCharIndex((prev) => prev + 1);
+      }, 100);
+    } else {
+      timerId = setTimeout(() => {
+        setCharIndex(0);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }, 2000);
+    }
+
+    return () => clearTimeout(timerId);
+  }, [charIndex, roleIndex]);
+
+  const text = roles[roleIndex].substring(0, charIndex);
+
   return (
     <section className="hero" id="home">
       <div className="container">
@@ -9,8 +37,7 @@ function Hero() {
           <div className="hero-text">
             <h1 className="hero-title">
               Hello, I'm
-              <br />
-              <span className="hero-name">Michel MUNEZERO</span>
+              <span className="hero-name typing">{text}|</span>
             </h1>
             <p className="hero-description">
               I'm a Computer Science student at College of Science and
