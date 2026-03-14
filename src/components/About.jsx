@@ -54,16 +54,33 @@ function About() {
               </div>
               <div className="info-item">
                 <span className="info-label">Certification:</span>
-                <span className="info-value">
-                  <a
-                    href="https://drive.google.com/file/d/1vl-I_YBD6sXtpX7_U2QFXoBwpgXlFQCN/view"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--primary-color)" }}
-                  >
-                    TechCrush - Cybersecurity
-                  </a>
-                </span>
+                <ul className="certification-list">
+                  <li className="certification-item">
+                    <span className="info-value">
+                      <a
+                        href="https://drive.google.com/file/d/1w9yA3qnPCVBXtUtU2ismjw991_sKjWET/view"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "var(--primary-color)" }}
+                      >
+                        Techcrush Bootcamp in Cybersecurity
+                      </a>
+                    </span>
+                  </li>
+
+                  <li className="certification-item">
+                    <span className="info-value">
+                      <a
+                        href="https://drive.google.com/file/d/1BxEyEjYV_ucAjKnywsYj20nphryr3_97/view"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "var(--primary-color)" }}
+                      >
+                        Forward Edge Cybersecurity Bootcamp 5.0
+                      </a>
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
 
