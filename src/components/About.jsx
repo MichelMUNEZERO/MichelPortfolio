@@ -7,7 +7,7 @@ function About() {
       <div className="container">
         <div className="about-content">
           <div className="about-image">
-            <div>
+            <div className="image-wrapper">
               <img
                 src="/images/Michel-MUNEZERO.PNG"
                 alt="Michel MUNEZERO - Computer Science Student"

@@ -4,7 +4,7 @@
 
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 80px;
   align-items: center;
 }
@@ -57,6 +57,7 @@
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .info-label {
@@ -78,9 +79,9 @@
 
 .info-value {
   color: var(--text-light);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .cv-buttons {
@@ -99,6 +100,11 @@
     gap: 40px;
   }
 
+  .about-image .profile-photo {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
   .about-text .section-title {
     text-align: center;
   }
@@ -113,5 +119,42 @@
 
   .cv-buttons {
     justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-text .section-title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .about-description {
+    line-height: 1.7;
+  }
+
+  .info-item {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .info-label {
+    min-width: 0;
+  }
+
+  .specialization-list,
+  .certification-list {
+    text-align: center;
+  }
+
+  .cv-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cv-buttons a,
+  .cv-buttons .btn-primary {
+    width: 100%;
+    max-width: 260px;
   }
 }

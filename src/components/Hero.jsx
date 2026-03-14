@@ -48,7 +48,16 @@ function Hero() {
               Cybersecurity Bootcamp. I'm dedicated to delivering high quality
               solutions that meet user needs.
             </p>
-            <button className="btn-primary">Hire me</button>
+            <button
+              className="btn-primary"
+              onClick={() => {
+                document
+                  .getElementById("contact")
+                  .scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Hire me
+            </button>
 
             <div className="hero-stats">
               <div className="stat-item">
