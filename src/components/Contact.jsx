@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
+
+const DESTINATION_EMAIL =
+  (import.meta.env.VITE_CONTACT_DESTINATION_EMAIL || "").trim() ||
+  "michelmunezero25@gmail.com";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -17,6 +21,19 @@ function Contact() {
     type: "", // 'success' or 'error'
   });
 
+  // Initialise EmailJS once when the component mounts so the public key is
+  // always registered, even if a previous call failed.
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init({ publicKey });
+    } else {
+      console.warn(
+        "EmailJS: VITE_EMAILJS_PUBLIC_KEY is not set. Add it to your .env file.",
+      );
+    }
+  }, []);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -32,10 +49,6 @@ function Contact() {
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-      const destinationEmail = (
-        import.meta.env.VITE_CONTACT_DESTINATION_EMAIL ||
-        "michelmunezero25@gmail.com"
-      ).trim();
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error(
@@ -43,15 +56,11 @@ function Contact() {
         );
       }
 
-      if (!destinationEmail) {
-        throw new Error(
-          "Destination email is empty. Set VITE_CONTACT_DESTINATION_EMAIL in .env.",
-        );
-      }
-
       const templateParams = {
         ...formData,
-        to_email: destinationEmail,
+        // to_email lets the template use {{to_email}} in its "To email" field.
+        // If the template has the address hard-coded this value is simply unused.
+        to_email: DESTINATION_EMAIL,
         reply_to: formData.from_email,
       };
 
@@ -59,9 +68,7 @@ function Contact() {
         serviceId,
         templateId,
         templateParams,
-        {
-          publicKey,
-        },
+        { publicKey },
       );
 
       console.log("Email sent successfully:", response);
@@ -91,18 +98,23 @@ function Contact() {
 
       const rawErrorText =
         error?.text || error?.message || "Email service is not configured.";
+
       const isNetworkError =
         /Failed to fetch|NetworkError|ERR_INTERNET_DISCONNECTED/i.test(
           rawErrorText,
         );
-      const isRecipientError = /recipient|recipients address is empty/i.test(
-        rawErrorText,
-      );
+
+      // EmailJS returns various messages when the recipient is missing:
+      //   "The recipients address is empty"
+      //   "Recipient is not configured"
+      //   "recipient ..." (any other variant)
+      const isRecipientError =
+        /recipient|recipients address is empty|to email/i.test(rawErrorText);
 
       const errorText = isNetworkError
         ? "Network request blocked or failed. Check internet, disable VPN/ad-blocker, and allow access to api.emailjs.com."
         : isRecipientError
-          ? "Recipient is not configured in EmailJS template. Set your template 'To email' to michelmunezero25@gmail.com (no braces) and save the template."
+          ? `EmailJS template is missing a recipient. Open your EmailJS dashboard → Email Templates → edit your template → set the "To email" field to michelmunezero25@gmail.com (plain address, no curly braces) → Save Template.`
           : rawErrorText;
 
       setStatus({
@@ -111,10 +123,10 @@ function Contact() {
         type: "error",
       });
 
-      // Clear error message after 7 seconds
+      // Clear error message after 10 seconds
       setTimeout(() => {
         setStatus({ loading: false, message: "", type: "" });
-      }, 7000);
+      }, 10000);
     }
   };
 

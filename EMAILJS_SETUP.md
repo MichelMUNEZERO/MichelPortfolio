@@ -46,10 +46,25 @@ Message:
 This email was sent from your portfolio contact form.
 ```
 
-4. In the "To email" field, set: **michelmunezero25@gmail.com**
-   - Use the plain email address, with no braces.
-   - This avoids the "recipient is empty" error caused by malformed template syntax.
-5. Save the template and copy the **Template ID** (looks like: template_xxxxxxx)
+4. **Set the "To email" field** — this is the most important step and the most common source of the "Recipient is not configured" error.
+
+   In the template editor click the **"Settings"** tab (or look for the "To email" input above the template body).  
+   Enter the recipient email address exactly as shown below:
+
+   ```
+   michelmunezero25@gmail.com
+   ```
+
+   > ⚠️ **Common mistakes that cause the "Recipient is not configured" error:**
+   > - Leaving the "To email" field **empty** → EmailJS cannot deliver the email.
+   > - Using `{{to_email}}` (with curly braces) — the variable approach also works
+   >   **only** if you type it exactly as `{{to_email}}` (two opening braces `{{`
+   >   followed by the variable name followed by two closing braces `}}`).
+   >   The form already passes `to_email = michelmunezero25@gmail.com`
+   >   as a template parameter, so both formats (hard-coded or `{{to_email}}`) are fine.
+   > - Using `{{ to_email }}` with spaces inside the braces — EmailJS won't resolve it.
+
+5. Click **"Save"** (top-right) and copy the **Template ID** (looks like: template_xxxxxxx)
 
 ## Step 4: Get Public Key
 
@@ -84,6 +99,10 @@ If you prefer a fixed recipient, you can keep `VITE_CONTACT_DESTINATION_EMAIL=mi
 
 ## Troubleshooting
 
+- **"Recipient is not configured" / "recipients address is empty"**:
+  The "To email" field in your EmailJS template is empty or incorrectly set.
+  Go to EmailJS dashboard → Email Templates → edit your template → set "To email"
+  to `michelmunezero25@gmail.com` → click **Save**.
 - If emails aren't arriving, check your spam folder
 - Make sure all IDs are correctly copied (no extra spaces)
 - Check the browser console for any error messages
