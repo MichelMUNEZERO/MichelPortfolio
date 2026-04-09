@@ -89,6 +89,16 @@
   border: 2px solid #ef4444;
 }
 
+.status-message .email-link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.status-message .email-link:hover {
+  opacity: 0.8;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
