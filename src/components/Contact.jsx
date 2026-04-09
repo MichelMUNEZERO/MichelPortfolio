@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
+// Build a mailto URL with form data pre-filled so users can send directly
+// when EmailJS is unavailable.
+function createMailtoUrl(formData) {
+  const subject = encodeURIComponent(formData.subject || "Portfolio Contact");
+  const body = encodeURIComponent(
+    `Name: ${formData.name}\nEmail: ${formData.email}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}`,
+  );
+  return `mailto:michelmunezero25@gmail.com?subject=${subject}&body=${body}`;
+}
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,6 +25,7 @@ function Contact() {
     loading: false,
     message: "",
     type: "", // 'success' or 'error'
+    showEmailLink: false,
   });
 
   const handleChange = (e) => {
@@ -26,13 +37,18 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ loading: true, message: "", type: "" });
+    setStatus({ loading: true, message: "", type: "", showEmailLink: false });
 
     try {
       // EmailJS configuration
-      const serviceId = "service_7krprop";
-      const templateId = "template_24vu669";
-      const publicKey = "4QcufM_4cy-ugl3yG";
+      // These keys are intentionally client-side (EmailJS is designed for browser use).
+      // Override them via environment variables for easier credential rotation.
+      const serviceId =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_7krprop";
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_24vu669";
+      const publicKey =
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "4QcufM_4cy-ugl3yG";
       // Send email using EmailJS
       const response = await emailjs.send(
         serviceId,
@@ -55,6 +71,7 @@ function Contact() {
         message:
           "Thank you! Your message has been sent successfully. I'll get back to you soon!",
         type: "success",
+        showEmailLink: false,
       });
 
       // Reset form
@@ -68,21 +85,22 @@ function Contact() {
 
       // Clear success message after 5 seconds
       setTimeout(() => {
-        setStatus({ loading: false, message: "", type: "" });
+        setStatus({ loading: false, message: "", type: "", showEmailLink: false });
       }, 5000);
     } catch (error) {
       console.error("Email sending failed:", error);
       setStatus({
         loading: false,
         message:
-          "Oops! Something went wrong. Please try again or contact me directly at michelmunezero25@gmail.com",
+          "Oops! Something went wrong. Please try again or contact me directly at",
         type: "error",
+        showEmailLink: true,
       });
 
-      // Clear error message after 7 seconds
+      // Clear error message after 10 seconds
       setTimeout(() => {
-        setStatus({ loading: false, message: "", type: "" });
-      }, 7000);
+        setStatus({ loading: false, message: "", type: "", showEmailLink: false });
+      }, 10000);
     }
   };
 
@@ -101,6 +119,17 @@ function Contact() {
           {status.message && (
             <div className={`status-message ${status.type}`}>
               {status.message}
+              {status.showEmailLink && (
+                <>
+                  {" "}
+                  <a
+                    href={createMailtoUrl(formData)}
+                    className="email-link"
+                  >
+                    michelmunezero25@gmail.com
+                  </a>
+                </>
+              )}
             </div>
           )}
 
