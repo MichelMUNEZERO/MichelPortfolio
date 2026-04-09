@@ -4,8 +4,8 @@ import "./Contact.css";
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    from_name: "",
+    from_email: "",
     subject: "",
     budget: "",
     message: "",
@@ -29,23 +29,39 @@ function Contact() {
     setStatus({ loading: true, message: "", type: "" });
 
     try {
-      // EmailJS configuration
-      const serviceId = "service_7krprop";
-      const templateId = "template_24vu669";
-      const publicKey = "4QcufM_4cy-ugl3yG";
-      // Send email using EmailJS
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const destinationEmail = (
+        import.meta.env.VITE_CONTACT_DESTINATION_EMAIL ||
+        "michelmunezero25@gmail.com"
+      ).trim();
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error(
+          "Missing EmailJS environment variables. Add them to your .env file.",
+        );
+      }
+
+      if (!destinationEmail) {
+        throw new Error(
+          "Destination email is empty. Set VITE_CONTACT_DESTINATION_EMAIL in .env.",
+        );
+      }
+
+      const templateParams = {
+        ...formData,
+        to_email: destinationEmail,
+        reply_to: formData.from_email,
+      };
+
       const response = await emailjs.send(
         serviceId,
         templateId,
+        templateParams,
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          budget: formData.budget,
-          message: formData.message,
-          to_email: "michelmunezero25@gmail.com", // Your email
+          publicKey,
         },
-        publicKey,
       );
 
       console.log("Email sent successfully:", response);
@@ -59,8 +75,8 @@ function Contact() {
 
       // Reset form
       setFormData({
-        name: "",
-        email: "",
+        from_name: "",
+        from_email: "",
         subject: "",
         budget: "",
         message: "",
@@ -72,10 +88,26 @@ function Contact() {
       }, 5000);
     } catch (error) {
       console.error("Email sending failed:", error);
+
+      const rawErrorText =
+        error?.text || error?.message || "Email service is not configured.";
+      const isNetworkError =
+        /Failed to fetch|NetworkError|ERR_INTERNET_DISCONNECTED/i.test(
+          rawErrorText,
+        );
+      const isRecipientError = /recipient|recipients address is empty/i.test(
+        rawErrorText,
+      );
+
+      const errorText = isNetworkError
+        ? "Network request blocked or failed. Check internet, disable VPN/ad-blocker, and allow access to api.emailjs.com."
+        : isRecipientError
+          ? "Recipient is not configured in EmailJS template. Set your template 'To email' to michelmunezero25@gmail.com (no braces) and save the template."
+          : rawErrorText;
+
       setStatus({
         loading: false,
-        message:
-          "Oops! Something went wrong. Please try again or contact me directly at michelmunezero25@gmail.com",
+        message: `Failed to send message: ${errorText}`,
         type: "error",
       });
 
@@ -108,9 +140,9 @@ function Contact() {
             <div className="form-group">
               <input
                 type="text"
-                name="name"
+                name="from_name"
                 placeholder="Your Name"
-                value={formData.name}
+                value={formData.from_name}
                 onChange={handleChange}
                 required
               />
@@ -118,9 +150,9 @@ function Contact() {
             <div className="form-group">
               <input
                 type="email"
-                name="email"
+                name="from_email"
                 placeholder="Your Email"
-                value={formData.email}
+                value={formData.from_email}
                 onChange={handleChange}
                 required
               />

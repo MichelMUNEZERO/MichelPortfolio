@@ -46,7 +46,9 @@ Message:
 This email was sent from your portfolio contact form.
 ```
 
-4. In the "To email" field, enter: **michelmunezero25@gmail.com**
+4. In the "To email" field, set: **michelmunezero25@gmail.com**
+   - Use the plain email address, with no braces.
+   - This avoids the "recipient is empty" error caused by malformed template syntax.
 5. Save the template and copy the **Template ID** (looks like: template_xxxxxxx)
 
 ## Step 4: Get Public Key
@@ -55,24 +57,23 @@ This email was sent from your portfolio contact form.
 2. Go to the **"General"** tab
 3. Copy your **Public Key** (looks like: xxxxxxxxxxxxxxxxx)
 
-## Step 5: Update Your Code
+## Step 5: Add Environment Variables
 
-1. Open `src/components/Contact.jsx`
-2. Find these lines (around line 30):
+1. Create a `.env` file in the project root
+2. Add your values:
 
-```javascript
-const serviceId = "YOUR_SERVICE_ID";
-const templateId = "YOUR_TEMPLATE_ID";
-const publicKey = "YOUR_PUBLIC_KEY";
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxx
+VITE_CONTACT_DESTINATION_EMAIL=michelmunezero25@gmail.com
 ```
 
-3. Replace with your actual values:
+3. Restart your dev server after editing `.env`
 
-```javascript
-const serviceId = "service_xxxxxxx"; // Your Service ID
-const templateId = "template_xxxxxxx"; // Your Template ID
-const publicKey = "xxxxxxxxxxxxxxxxx"; // Your Public Key
-```
+The contact form already reads these variables from `src/components/Contact.jsx`.
+
+If you prefer a fixed recipient, you can keep `VITE_CONTACT_DESTINATION_EMAIL=michelmunezero25@gmail.com` as-is.
 
 ## Step 6: Test Your Contact Form
 
@@ -90,19 +91,8 @@ const publicKey = "xxxxxxxxxxxxxxxxx"; // Your Public Key
 
 ## Security Note
 
-For production, consider moving these keys to environment variables:
-
-1. Create a `.env` file in your project root
-2. Add:
-
-```
-VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
-VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
-VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxx
-```
-
-3. Update Contact.jsx to use: `import.meta.env.VITE_EMAILJS_SERVICE_ID`
-4. Add `.env` to your `.gitignore` file
+Your `.env` file should stay private and must not be committed.
+This project already ignores `.env` in `.gitignore`.
 
 ---
 

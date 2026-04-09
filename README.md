@@ -35,6 +35,15 @@ npm run build
 
 ## Customization
 
+### Contact Form (EmailJS)
+
+To enable the contact form email delivery:
+
+1. Copy `.env.example` to `.env`
+2. Add your real EmailJS keys and destination email
+3. Follow full setup in `EMAILJS_SETUP.md`
+4. Restart the dev server
+
 ### Replace Placeholder Images
 
 Replace the SVG placeholders in the following components with your actual images:
