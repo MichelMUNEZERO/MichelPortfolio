@@ -54,13 +54,42 @@ function Contact() {
         serviceId,
         templateId,
         {
+          // Name variations
+          name: formData.name,
           from_name: formData.name,
+          user_name: formData.name,
+          sender_name: formData.name,
+          contact_name: formData.name,
+
+          // Sender Email variations
           from_email: formData.email,
+          sender_email: formData.email,
+          user_email: formData.email,
+          contact_email: formData.email,
+          reply_to: formData.email,
+
+          // Subject variations
           subject: formData.subject,
+          title: formData.subject,
+
+          // Budget variations
           budget: formData.budget,
+
+          // Message/Request variations
           message: formData.message,
-          email: "michelmunezero25@gmail.com", // Recipient email expected by template
-          to_email: "michelmunezero25@gmail.com", // Fallback recipient email
+          request: formData.message,
+          user_message: formData.message,
+          message_content: formData.message,
+          request_content: formData.message,
+          body: formData.message,
+          comment: formData.message,
+          comments: formData.message,
+          notes: formData.message,
+          description: formData.message,
+
+          // Recipient email variations (required by template routing)
+          email: "michelmunezero25@gmail.com",
+          to_email: "michelmunezero25@gmail.com",
         },
         publicKey,
       );
