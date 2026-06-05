@@ -59,7 +59,8 @@ function Contact() {
           subject: formData.subject,
           budget: formData.budget,
           message: formData.message,
-          to_email: "michelmunezero25@gmail.com", // Your email
+          email: "michelmunezero25@gmail.com", // Recipient email expected by template
+          to_email: "michelmunezero25@gmail.com", // Fallback recipient email
         },
         publicKey,
       );
